@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<interface>
+  <template class="SearcherWindow" parent="GtkApplicationWindow">
+    <property name="width-request">240</property>
+    <property name="height-request">40</property>
+    <property name="decorated">false</property>
+    <property name="resizable">false</property>
+    <!-- might remove them as they are X11 specific features -->
+    <property name="skip-taskbar-hint">true</property>
+    <!-- <property name="skip-pager-hint">true</property> -->
+    <signal name="key-press-event" handler="on_keypress_cb" />
+    <signal name="focus-out-event" handler="close_cb" />
+    <child>
+      <object class="GtkEntry" id="search_bar">
+	<property name="visible">true</property>
+	<property name="halign">fill</property>
+	<property name="valign">fill</property>
+	<property name="hexpand">true</property>
+	<property name="vexpand">true</property>
+	<signal name="activate" handler="on_enter_cb" />
+      </object>
+    </child>
+  </template>
+</interface>
