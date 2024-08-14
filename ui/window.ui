@@ -17,6 +17,7 @@
 	<property name="valign">fill</property>
 	<property name="hexpand">true</property>
 	<property name="vexpand">true</property>
+	<property name="placeholder-text">Launch an  application...</property>
 	<signal name="activate" handler="on_enter_cb" />
       </object>
     </child>

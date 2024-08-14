@@ -7,6 +7,33 @@ public class Window : Gtk.ApplicationWindow
     [GtkChild]
     private unowned Gtk.Entry search_bar;
 
+    private List<DesktopAppInfo> _desktop_file_list;
+
+    private List<DesktopAppInfo> desktop_file_list {
+	get {
+	    if(_desktop_file_list == null)
+		_desktop_file_list = get_desktop_files();
+	    return _desktop_file_list;
+	}
+    }
+
+    private Gtk.TreeModel build_completion()
+    {
+	Gtk.TreeIter iter;
+	var store = new Gtk.ListStore(2, Type.STRING, Type.STRING);
+
+	foreach(var desktop_file in desktop_file_list) {
+	    var name = desktop_file.get_string("Name");
+	    var exec = desktop_file.get_string("Exec");
+	    if(exec == null)
+		continue;
+	    store.append(out iter);
+	    store.set(iter, 0, name, 1, exec, -1);
+	}
+	
+	return store;
+    }
+
     [GtkCallback]
     public bool on_keypress_cb(Gtk.Widget widget, Gdk.EventKey event)
     {
@@ -28,6 +55,13 @@ public class Window : Gtk.ApplicationWindow
     public void on_enter_cb()
     {
 	message("%s", search_bar.text);
+    }
+
+    construct {
+	var completion = new Gtk.EntryCompletion();
+	completion.model = build_completion();
+	completion.text_column = 0;
+	this.search_bar.completion = completion;
     }
     
     public Window(Gtk.Application application)

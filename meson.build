@@ -1,11 +1,16 @@
 project(
   'searcher',
   'vala',
+  default_options: [
+    'optimization=2'
+  ]
 )
 
 searcher_deps = [
   dependency('glib-2.0'),
   dependency('gobject-2.0'),
+  dependency('gio-2.0'),
+  dependency('gio-unix-2.0'),
   dependency('gtk+-3.0')
 ]
 
@@ -13,7 +18,8 @@ gnome = import('gnome')
 
 searcher_sources = [
   'Searcher.vala',
-  'Window.vala'
+  'Window.vala',
+  'DesktopFileSearch.vala'
 ]
 
 searcher_sources += gnome.compile_resources('searcher-gresources',
