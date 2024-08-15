@@ -1,6 +1,7 @@
 project(
   'searcher',
   'vala',
+  version: '0.1',
   default_options: [
     'optimization=2'
   ]
