@@ -7,12 +7,12 @@ public class Window : Gtk.ApplicationWindow
     [GtkChild]
     private unowned Gtk.Entry search_bar;
 
-    private List<DesktopAppInfo> _desktop_file_list;
+    private List<AppInfo> _desktop_file_list;
 
-    private List<DesktopAppInfo> desktop_file_list {
+    private List<AppInfo> desktop_file_list {
 	get {
 	    if(_desktop_file_list == null)
-		_desktop_file_list = get_desktop_files();
+		_desktop_file_list = AppInfo.get_all();
 	    return _desktop_file_list;
 	}
     }
@@ -23,12 +23,9 @@ public class Window : Gtk.ApplicationWindow
 	var store = new Gtk.ListStore(2, Type.STRING, Type.STRING);
 
 	foreach(var desktop_file in desktop_file_list) {
-	    var name = desktop_file.get_string("Name");
-	    var exec = desktop_file.get_string("Exec");
-	    if(exec == null)
-		continue;
+	    var name = desktop_file.get_name();
 	    store.append(out iter);
-	    store.set(iter, 0, name, 1, exec, -1);
+	    store.set(iter, 0, name, -1);
 	}
 	
 	return store;
@@ -59,7 +56,7 @@ public class Window : Gtk.ApplicationWindow
 	// Try to launch an application and close the launcher if
 	// successful.
 	foreach(var desktop_file in desktop_file_list) {
-	    if(desktop_file.get_string("Name").down() == text.down()) {
+	    if(desktop_file.get_name().down() == text.down()) {
 		var launch_ctx = Gdk.Display.get_default()
 		                            .get_app_launch_context();
 		try {
