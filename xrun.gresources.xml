@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <gresources>
-  <gresource prefix="/io/github/ydalton/Searcher">
+  <gresource prefix="/io/github/ydalton/XRun">
     <file preprocess="xml-stripblanks">ui/window.ui</file>
   </gresource>
 </gresources>

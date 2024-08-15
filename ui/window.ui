@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <interface>
-  <template class="SearcherWindow" parent="GtkApplicationWindow">
+  <template class="XRunWindow" parent="GtkApplicationWindow">
     <property name="width-request">240</property>
     <property name="height-request">40</property>
     <property name="decorated">false</property>

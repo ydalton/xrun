@@ -1,5 +1,5 @@
 project(
-  'searcher',
+  'xrun',
   'vala',
   version: '0.1',
   default_options: [
@@ -7,7 +7,7 @@ project(
   ]
 )
 
-searcher_deps = [
+xrun_deps = [
   dependency('glib-2.0'),
   dependency('gobject-2.0'),
   dependency('gio-2.0'),
@@ -16,17 +16,17 @@ searcher_deps = [
 
 gnome = import('gnome')
 
-searcher_sources = [
-  'Searcher.vala',
+xrun_sources = [
+  'XRun.vala',
   'Window.vala',
 ]
 
-searcher_sources += gnome.compile_resources('searcher-gresources',
-                                            'searcher.gresources.xml')
+xrun_sources += gnome.compile_resources('xrun-gresources',
+                                            'xrun.gresources.xml')
 
 executable(
   meson.project_name(),
-  searcher_sources,
-  dependencies: searcher_deps,
+  xrun_sources,
+  dependencies: xrun_deps,
   install: true
 )

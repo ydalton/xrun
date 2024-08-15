@@ -1,11 +1,11 @@
-namespace Searcher
+namespace XRun
 {
 
 class Application : Gtk.Application
 {
     public Application()
     {
-	Object(application_id: "io.github.ydalton.Searcher",
+	Object(application_id: "io.github.ydalton.XRun",
 	       flags: ApplicationFlags.DEFAULT_FLAGS);
     }
 
@@ -17,9 +17,9 @@ class Application : Gtk.Application
     
     public static int main(string[] args)
     {
-	var application = new Searcher.Application();
+	var application = new XRun.Application();
 	return application.run();
     }
 }
 
-} // namespace Searcher
+} // namespace XRun

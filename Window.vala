@@ -1,7 +1,7 @@
-namespace Searcher
+namespace XRun
 {
 
-[GtkTemplate(ui="/io/github/ydalton/Searcher/ui/window.ui")]
+[GtkTemplate(ui="/io/github/ydalton/XRun/ui/window.ui")]
 public class Window : Gtk.ApplicationWindow
 {
     [GtkChild]
@@ -86,4 +86,4 @@ public class Window : Gtk.ApplicationWindow
     }
 }
 
-} // namespace Searcher
+} // namespace XRun
