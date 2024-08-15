@@ -29,5 +29,6 @@ searcher_sources += gnome.compile_resources('searcher-gresources',
 executable(
   meson.project_name(),
   searcher_sources,
-  dependencies: searcher_deps
+  dependencies: searcher_deps,
+  install: true
 )
