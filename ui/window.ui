@@ -9,6 +9,7 @@
     <property name="skip-taskbar-hint">true</property>
     <!-- <property name="skip-pager-hint">true</property> -->
     <signal name="key-press-event" handler="on_keypress_cb" />
+    <!-- FIXME: this breaks the GTK inspector, among other things. -->
     <signal name="focus-out-event" handler="close_cb" />
     <child>
       <object class="GtkEntry" id="search_bar">

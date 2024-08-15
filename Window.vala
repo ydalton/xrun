@@ -54,7 +54,31 @@ public class Window : Gtk.ApplicationWindow
     [GtkCallback]
     public void on_enter_cb()
     {
-	message("%s", search_bar.text);
+	var text = search_bar.text;
+	string exec;
+
+	// Try to launch an application and close the launcher if
+	// successful.
+	foreach(var desktop_file in desktop_file_list) {
+	    if(desktop_file.get_string("Name").down() == text.down()) {
+		// FIXME: sometimes exec string in desktop file contain
+		// placeholder strings like %F to signify where a file
+		// would go. Ignore those in the future.
+		exec = desktop_file.get_string("Exec");
+
+		try {
+		    Process.spawn_command_line_async(exec);
+		} catch (SpawnError e) {
+		    warning("Failed to launch process: %s", e.message);
+		    warning("Command-line: %s", exec);
+		    return;
+		}
+
+		this.close();
+	    }
+	}
+
+	message("No results found.");
     }
 
     construct {
