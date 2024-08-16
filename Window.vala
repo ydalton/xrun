@@ -77,6 +77,8 @@ public class Window : Gtk.ApplicationWindow
 	var completion = new Gtk.EntryCompletion();
 	completion.model = build_completion();
 	completion.text_column = 0;
+	completion.inline_completion = true;
+	completion.popup_single_match = false;
 	this.search_bar.completion = completion;
     }
     
