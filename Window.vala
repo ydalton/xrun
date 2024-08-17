@@ -56,7 +56,7 @@ public class Window : Gtk.ApplicationWindow
         // Try to launch an application and close the launcher if
         // successful.
         foreach(var desktop_file in desktop_file_list) {
-            if(desktop_file.get_name().down() == text.down()) {
+	    if(should_match(desktop_file.get_name(), text)) {
                 var launch_ctx = Gdk.Display.get_default()
                                             .get_app_launch_context();
                 try {
@@ -73,6 +73,14 @@ public class Window : Gtk.ApplicationWindow
         message("No results found.");
     }
 
+    private bool should_match(string name, string key)
+    {
+        if(key.down() in name.down())
+            return true;
+
+        return false;
+    }
+
     private bool match_func(Gtk.EntryCompletion completion,
                             string key,
                             Gtk.TreeIter iter)
@@ -82,10 +90,8 @@ public class Window : Gtk.ApplicationWindow
         var model = completion.model;
         model.get_value(iter, completion.text_column, out text_value);
         var row = text_value.get_string();
-        if(key.down() in row.down())
-            return true;
 
-        return false;
+	return should_match(row, key);
     }
 
     construct {
