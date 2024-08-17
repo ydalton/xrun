@@ -73,15 +73,32 @@ public class Window : Gtk.ApplicationWindow
 	message("No results found.");
     }
 
-    construct {
-	var completion = new Gtk.EntryCompletion();
-	completion.model = build_completion();
-	completion.text_column = 0;
-	completion.inline_completion = true;
-	completion.popup_single_match = false;
-	this.search_bar.completion = completion;
+    private bool match_func(Gtk.EntryCompletion completion,
+			    string key,
+			    Gtk.TreeIter iter)
+    {
+	Value text_value;
+
+	var model = completion.model;
+	model.get_value(iter, completion.text_column, out text_value);
+	var row = text_value.get_string();
+	if(key.down() in row.down())
+	    return true;
+
+	return false;
     }
-    
+
+    construct {
+        var completion = new Gtk.EntryCompletion() {
+            model = build_completion(),
+            text_column = 0,
+            inline_completion = true,
+            popup_single_match = true,
+        };
+        completion.set_match_func(match_func);
+        this.search_bar.completion = completion;
+    }
+
     public Window(Gtk.Application application)
     {
 	Object(application: application);
