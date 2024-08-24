@@ -67,6 +67,8 @@ public class Window : Gtk.ApplicationWindow
                 }
 
                 this.close();
+
+                return;
             }
         }
 
